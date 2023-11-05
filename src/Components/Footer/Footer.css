@@ -1,0 +1,14 @@
+.footer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 10px;
+}
+.sakib {
+  font-size: large;
+}
+.copyright {
+  font-size: smaller;
+}
