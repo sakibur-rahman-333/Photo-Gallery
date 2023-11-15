@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import Main from './Main';
 import axios from 'axios';
+import { Provider } from 'react-redux';
+import myStore from './redux/Store';
 
 class App extends Component {
   state = {
@@ -19,7 +21,11 @@ class App extends Component {
   }
 
   render() {
-    return this.state.data ? <Main data={this.state.data} /> : null;
+    return this.state.data ? (
+      <Provider store={myStore}>
+        <Main data={this.state.data} />
+      </Provider>
+    ) : null;
   }
 }
 

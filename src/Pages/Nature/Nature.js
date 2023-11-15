@@ -5,10 +5,16 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
   CloseButton,
 } from 'reactstrap';
+import Comment from '../Comment/Comment';
+import { connect } from 'react-redux';
+
+const mapStateToPropsNature = (state) => {
+  return {
+    image: state.updateModal,
+  };
+};
 
 class Nature extends Component {
   state = {
@@ -26,6 +32,7 @@ class Nature extends Component {
       modalOpen: !this.state.modalOpen,
     });
   };
+
   render() {
     const nature = this.props.data.map((item) => {
       if (item.category === 'nature') {
@@ -44,6 +51,16 @@ class Nature extends Component {
         );
       }
     });
+    const comments = this.state.image
+      ? this.state.image.comments.map((item) => {
+          return (
+            <div key={item.id} style={{ lineHeight: '5px' }}>
+              <p style={{ fontWeight: 'bold' }}>{item.email}</p>
+              <p style={{ marginLeft: '10px' }}>{item.comment}</p>
+            </div>
+          );
+        })
+      : null;
     return (
       <div>
         <div className='all'>{nature}</div>
@@ -57,16 +74,19 @@ class Nature extends Component {
           </ModalHeader>
           <ModalBody>
             <CardImg
+              className='modal-image'
               src={this.state.image.path}
               alt='image'
               style={{ marginBottom: '15px' }}
             />
+            {comments}
+            <hr />
+            <Comment image={this.state.image} />
           </ModalBody>
-          <ModalFooter></ModalFooter>
         </Modal>
       </div>
     );
   }
 }
 
-export default Nature;
+export default connect(mapStateToPropsNature)(Nature);

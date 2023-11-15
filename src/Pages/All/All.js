@@ -5,10 +5,16 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
   CloseButton,
 } from 'reactstrap';
+import Comment from '../Comment/Comment';
+import { connect } from 'react-redux';
+
+const mapStateToPropsAll = (state) => {
+  return {
+    image: state.updateModal,
+  };
+};
 
 class All extends Component {
   state = {
@@ -42,29 +48,42 @@ class All extends Component {
         </div>
       );
     });
+    const comments = this.state.image
+      ? this.state.image.comments.map((item) => {
+          return (
+            <div key={item.id} style={{ lineHeight: '5px' }}>
+              <p style={{ fontWeight: 'bold' }}>{item.email}</p>
+              <p style={{ marginLeft: '10px' }}>{item.comment}</p>
+            </div>
+          );
+        })
+      : null;
     return (
       <div>
         <div className='all'>{all}</div>
         <Modal isOpen={this.state.modalOpen}>
           <ModalHeader
             style={{ position: 'absolute', right: '2px', top: '2px' }}>
-            <CloseButton onClick={this.toggleModal} />
+            <CloseButton id='close-button' onClick={this.toggleModal} />
           </ModalHeader>
           <ModalHeader style={{ textTransform: 'capitalize' }}>
             {this.state.image.name}
           </ModalHeader>
           <ModalBody>
             <CardImg
+              className='modal-image'
               src={this.state.image.path}
               alt='image'
               style={{ marginBottom: '15px' }}
             />
+            {comments}
+            <hr />
+            <Comment image={this.state.image} />
           </ModalBody>
-          <ModalFooter></ModalFooter>
         </Modal>
       </div>
     );
   }
 }
 
-export default All;
+export default connect(mapStateToPropsAll)(All);

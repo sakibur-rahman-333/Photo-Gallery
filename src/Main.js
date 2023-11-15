@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Body from './Components/Body/Body';
-import Footer from './Components/Footer/Footer';
 import All from './Pages/All/All';
 import Animal from './Pages/Animal/Animal';
 import Food from './Pages/Food/Food';
@@ -32,7 +31,6 @@ class Main extends Component {
         />
         <Route exact path='/signin' component={Signin} />
         <Body />
-        <Footer />
       </BrowserRouter>
     );
   }
