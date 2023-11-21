@@ -13,7 +13,7 @@
 5: Open terminal and write `json-server db.json --watch -p 3001`.
 
 6: After starting the server you will see like this.
-![Screenshot](https://github.com/sakibur-rahman-333/Images/blob/main/db-screenshot.png?raw=true)
+![Screenshot](https://raw.githubusercontent.com/sakibur-rahman-333/Images/main/db-screenshot.png)
 
 ## Project running process
 
